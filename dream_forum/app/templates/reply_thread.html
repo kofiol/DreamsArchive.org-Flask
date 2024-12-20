@@ -1,0 +1,11 @@
+﻿{% extends "base.html" %}
+{% block title %}Reply to {{ thread.title }}{% endblock %}
+{% block content %}
+<h2>Reply to: {{ thread.title }}</h2>
+<form method="post" enctype="multipart/form-data">
+    <textarea name="message" placeholder="Your message" required></textarea>
+    <input type="file" name="image" accept="image/*">
+    <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+    <button type="submit">Post Reply</button>
+</form>
+{% endblock %}

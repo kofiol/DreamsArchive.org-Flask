@@ -1,0 +1,18 @@
+﻿{% extends 'base.html' %}
+{% block title %}{{ board.name }} - Threads{% endblock %}
+{% block content %}
+<h2>{{ board.name }}</h2>
+<p>{{ board.description }}</p>
+<a class='btn' href='{{ url_for("main.new_thread", board_id=board.id) }}'>Start New Thread</a>
+<ul>
+    {% for thread in threads %}
+    <li>
+        <a href='{{ url_for("main.thread_posts", board_id=board.id, thread_id=thread.id) }}'>{{ thread.title }}</a><br>
+        <small>Started at {{ thread.created_at }} from {{ thread.created_by_ip }}</small>
+    </li>
+    {% endfor %}
+    {% if threads|length == 0 %}
+    <li>No threads yet.</li>
+    {% endif %}
+</ul>
+{% endblock %}

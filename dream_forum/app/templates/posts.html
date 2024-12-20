@@ -1,0 +1,29 @@
+﻿{% extends "base.html" %}
+{% block title %}{{ thread.title }} - Posts{% endblock %}
+{% block content %}
+<h2>{{ thread.title }}</h2>
+<p><small>Board: <a href="{{ url_for('main.thread_list', board_id=thread.board.id) }}">{{ thread.board.name }}</a></small></p>
+<ul class="posts">
+    {% for post in posts %}
+    <li class="post">
+        <div class="post-content">
+            {{ post.message|safe }}
+            {% if post.image %}
+            <div><img src="{{ url_for('static', filename='images/' ~ post.image) }}" alt="Attached image"></div>
+            {% endif %}
+        </div>
+        <div class="post-meta">
+            Posted at {{ post.created_at }} from IP: {{ post.created_by_ip }}
+        </div>
+        <!-- Removed Upvote form -->
+
+        <!-- Admin delete form -->
+        <form method="post" action="{{ url_for('main.delete_post', post_id=post.id) }}" style="display:inline;">
+            <input type="password" name="admin_password" placeholder="Admin Password" required>
+            <button type="submit">Delete Post</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+<a class="btn" href="{{ url_for('main.reply_thread', board_id=thread.board.id, thread_id=thread.id) }}">Reply</a>
+{% endblock %}

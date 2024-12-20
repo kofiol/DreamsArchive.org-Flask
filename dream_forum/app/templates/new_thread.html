@@ -1,0 +1,11 @@
+﻿{% extends "base.html" %}
+{% block title %}New Thread in {{ board.name }}{% endblock %}
+{% block content %}
+<h2>New Thread in {{ board.name }}</h2>
+<form method="post">
+    <input type="text" name="title" placeholder="Thread title" required>
+    <textarea name="message" placeholder="Your message" required></textarea>
+    <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+    <button type="submit">Create Thread</button>
+</form>
+{% endblock %}

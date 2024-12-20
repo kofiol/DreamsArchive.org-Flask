@@ -1,0 +1,14 @@
+﻿{% extends "base.html" %}
+{% block title %}Dreams Archive - Boards{% endblock %}
+{% block content %}
+<h2>Boards</h2>
+<p>Unique users: {{ user_count }}</p>
+<ul>
+    {% for board in boards %}
+    <li>
+        <a href="{{ url_for('main.thread_list', board_id=board.id) }}">{{ board.name }}</a><br>
+        <small>{{ board.description }}</small>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
